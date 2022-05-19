@@ -48,7 +48,7 @@ namespace csharp_biblioteca
            
 
             Console.WriteLine("1 : registra utente");
-            Console.WriteLine("2 : richiedi prestito");
+            Console.WriteLine("2 : stampa la parte del main discussa in esercitazione");
 
             Console.WriteLine("press enter to exit");
 
@@ -142,10 +142,128 @@ namespace csharp_biblioteca
 
                 }
 
-                // da implementare....
+                // da implementare altre operazioni
+
                 if (sOperazione == "2")
                 {
-                    Console.WriteLine("Richiedi Prestito");
+                    // parte inserita per esercitazione ( aggiumta Lista Utenti )
+                    // nella prima parte lavora con il dizionario
+
+                    MiaBib.RestoreUtenti();
+
+                    Scaffale s1 = new Scaffale("S001");
+                    Scaffale s2 = new Scaffale("S002");
+                    Scaffale s3 = new Scaffale("S003");
+
+                    Libro l1 = new Libro("ISBN1", "Titolo 1", 2009, "Storia", 220);
+
+                    Autore a1 = new Autore("Nome 1", "Cognome 1");
+                    Autore a2 = new Autore("Nome 2", "Cognome 2");
+
+                    l1.Autori.Add(a1);
+                    l1.Autori.Add(a2);
+
+                    l1.Scaffale = s1;
+
+                    MiaBib.Documenti.Add(l1);
+
+
+                    Libro l2 = new Libro("ISBN2", "Titolo 2", 2009, "Storia", 130);
+
+                    Autore a3 = new Autore("Nome 3", "Cognome 3");
+                    Autore a4 = new Autore("Nome 4", "Cognome 4");
+
+                    l2.Autori.Add(a3);
+                    l2.Autori.Add(a4);
+
+                    l2.Scaffale = s2;
+                    MiaBib.Documenti.Add(l2);
+                    
+
+                    
+                    Dvd dvd1 = new Dvd("Codice1", "Titolo 3", 2019, "Storia", 130);
+
+                    dvd1.Autori.Add(a3);
+
+                    dvd1.Scaffale = s3;
+                    MiaBib.Documenti.Add(dvd1);
+                    
+
+                    Utente u1 = new Utente("Nome 1", "Cognome 1", "Telefono 1", "Email 1", "Password 1");
+
+                    Utente prova = new Utente("Carlo", "Prova", "TelefonoP1", "EmailP1", "PasswordP1");
+
+                    // devo commentare i due Add per provare il metodo Restore
+
+                    MiaBib.Utenti.Add(u1);  //aggiunge alla lista direttamente
+
+                    MiaBib.SaveUtenti();  // Salva gli utenti della lista
+
+                    MiaBib.Utenti.Add(prova);  //aggiunge alla lista direttamente
+
+                    MiaBib.SaveUtenti();
+
+                    //Questa parte è per prendere anche gli utenti del dizionario
+
+                    //se volessi usare il dizionario: ( per motivi solo di studio ) 
+
+                    MiaBib.MiaListaUtenti.AggiungiUtente("Luca", "Rossi", "telefono", "email", "psw");
+
+                    //per evitare di chiedere la psw la inserisco in provvisorio direttamente
+                    string chiave = "Luca" + ";" + "Rossi" + ";" + "email";
+
+                    //la uso per il secondo utente preso da dizionario con un metodo specifico
+                    Utente u2 = MiaBib.MiaListaUtenti.SingoloUtente(chiave);
+
+
+                    Prestito p1 = new Prestito("P00001", new DateTime(2019, 1, 20), new DateTime(2019, 2, 20), u1, l1);
+                    Prestito p2 = new Prestito("P00002", new DateTime(2019, 3, 20), new DateTime(2019, 4, 20), u1, l2);
+
+                   
+
+                    Prestito p3 = new Prestito("P00002", new DateTime(2019, 3, 20), new DateTime(2019, 4, 20), u2, l2);
+
+                    MiaBib.Prestiti.Add(p1);
+                    MiaBib.Prestiti.Add(p2);
+
+                    // Devo modificare L'inserimento in Add e la ricerca in prestiti per gli elementi passati da stringa
+                                     
+
+                    Console.WriteLine("\n\nSearchByCodice: ISBN1\n\n");
+
+                    List<Documento> results = MiaBib.SearchByCodice("ISBN1");
+
+                    foreach (Documento doc in results)
+                    {
+                        Console.WriteLine(doc.ToString());
+
+                        if (doc.Autori.Count > 0)
+                        {
+                            Console.WriteLine("--------------------------");
+                            Console.WriteLine("Autori");
+                            Console.WriteLine("--------------------------");
+                            foreach (Autore a in doc.Autori)
+                            {
+                                Console.WriteLine(a.ToString());
+                                Console.WriteLine("--------------------------");
+                            }
+                        }
+                    }
+
+                    Console.WriteLine("\n\nSearchPrestiti: Nome 1, Cognome 1\n\n");
+
+                    List<Prestito> prestiti = MiaBib.SearchPrestiti("Nome 1", "Cognome 1");
+
+                    foreach (Prestito p in prestiti)
+                    {
+                        Console.WriteLine(p.ToString());
+                        Console.WriteLine("--------------------------");
+                    }
+
+                    Console.WriteLine();
+                    Console.WriteLine("---------------------------");
+
+                    Console.WriteLine("Esegui nuova operazione");
                     sOperazione = Console.ReadLine();
                 }
 

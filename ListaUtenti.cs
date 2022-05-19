@@ -55,6 +55,26 @@ namespace csharp_biblioteca
             
         }
 
+        // metodo per tornare l'utente creato per esercitazione
+
+        public Utente SingoloUtente(string chiave) 
+        
+        {
+            
+
+            if(myDictionary.ContainsKey(chiave)) {
+
+                Utente value =  myDictionary[chiave];
+
+                return value; 
+            }
+
+            else { return myDictionary.GetValueOrDefault(chiave, null); }
+            
+                        
+
+        }
+
         
     }
 }

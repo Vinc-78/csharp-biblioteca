@@ -24,6 +24,8 @@ namespace csharp_biblioteca
             this.Documento.Stato = Stato.Prestito;
         }
 
+        
+
         public override string ToString()
         {
             return string.Format("Numero:{0}\nDal:{1}\nAl:{2}\nStato:{3}\nUtente:\n{4}\nDocumento:\n{5}",

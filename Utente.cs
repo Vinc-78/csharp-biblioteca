@@ -10,7 +10,7 @@ namespace csharp_biblioteca
     {
         public string Telefono { get; set; }
         public string Email { get; set; }
-        public string Password { private get; set; }
+        public string Password { get; set; }
 
         public Utente(string Nome, string Cognome, string Telefono, string Email, string Password) : base(Nome, Cognome)
         {
