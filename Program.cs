@@ -199,7 +199,7 @@ namespace csharp_biblioteca
 
                     Utente prova = new Utente("Carlo", "Prova", "TelefonoP1", "EmailP1", "PasswordP1");
 
-                    // devo commentare i due Add per provare il metodo Restore
+                    // devo commentare i due Add per provare il metodo Restore riga 156
 
                     MiaBib.Utenti.Add(u1);  //aggiunge alla lista direttamente
 
@@ -309,34 +309,27 @@ namespace csharp_biblioteca
                 
 
                 string linea = "";
-                try
+                Console.WriteLine("sto leggendo {0}", pathInfo);
+                using (StreamReader leggi = new StreamReader(pathInfo)) 
+
+                
                 {
-                    Console.WriteLine("sto leggendo {0}", pathInfo );
-                    StreamReader leggi = new StreamReader(pathInfo);
 
                     while ((linea = leggi.ReadLine()) != null)
                     //legge il contenuto di Info
                     {
 
-                        pathSalva=linea;
+                        pathSalva = linea;
 
-                        leggi.Close();     //Importante
-
+                        //Importante
                     }
 
-                    
                 }
-                catch (Exception e)
-                {
-                    Console.WriteLine("Exception: " + e.Message);
-                    
-                }
-
-
+               
             }
             else
             {
-                Console.WriteLine("Preferenze di stampa");
+                Console.WriteLine("Preferenze di salvataggio ");
                 Console.WriteLine("1 : Vuoi salvare in un nuovo file ");
                 Console.WriteLine("2 : Usa il percorso standard ");
 
