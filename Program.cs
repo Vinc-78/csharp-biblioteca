@@ -46,6 +46,13 @@ namespace csharp_biblioteca
             */
 
            
+            /* NOTA:
+             * Per la gestione del file / dal main si può scegliere due opzioni
+             * con la 1 si registra un utente usando il dizionario definito in Biblioteca 
+             con la 2 si utilizzano le liste e quindi i vari metodi sviluppati nelle lezioni / esercitazioni
+            successive alla prima versione del programma
+            
+            */
 
             Biblioteca MiaBib = new Biblioteca("Universitaria");
 
@@ -147,12 +154,12 @@ namespace csharp_biblioteca
 
                 }
 
-                // da implementare altre operazioni
+                
 
                 if (sOperazione == "2")
                 {
                     // parte inserita per esercitazione ( aggiumta Lista Utenti )
-                    // nella prima parte lavora con il dizionario
+                    
 
                     CreaFilediSalvataggio();  // metodo aggiunto nell'esercitazione del 20/05 di mattina
                                               // per la configurazione di un file di salvataggio
@@ -214,7 +221,7 @@ namespace csharp_biblioteca
 
                     //Questa parte è per prendere anche gli utenti del dizionario
 
-                    //se volessi usare il dizionario: ( per motivi solo di studio ) 
+                    //se volessi usare il dizionario: ( aggiunta per motivi di studio/prove ) 
 
                     MiaBib.MiaListaUtenti.AggiungiUtente("Luca", "Rossi", "telefono", "email", "psw");
 
@@ -229,6 +236,7 @@ namespace csharp_biblioteca
                     Prestito p2 = new Prestito("P00002", new DateTime(2019, 3, 20), new DateTime(2019, 4, 20), u1, l2);
 
                     //prove sul DataTime
+
                     var tempoAl = p1.Al;
 
                     DateTime ora = DateTime.Now;
