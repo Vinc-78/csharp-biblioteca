@@ -315,14 +315,14 @@ namespace csharp_biblioteca
                 Console.WriteLine("la directory non esisteva l'ho creata");
             }
 
-            if (File.Exists(pathInfo))
+            if (File.Exists(ReadSetting("pathInfo")))
             {
                 Console.WriteLine("Il file esiste vado a leggere il percorso");
 
 
                 string linea = "";
-                Console.WriteLine("sto leggendo {0}", pathInfo);
-                using (StreamReader leggi = new StreamReader(pathInfo))
+                Console.WriteLine("sto leggendo {0}", ReadSetting("pathInfo"));
+                using (StreamReader leggi = new StreamReader(ReadSetting("pathInfo")))
 
 
                 {
@@ -360,9 +360,9 @@ namespace csharp_biblioteca
                 {
                     try
                     {
-                        StreamWriter sw = new StreamWriter(pathInfo);
+                        StreamWriter sw = new StreamWriter(ReadSetting("pathInfo"));
 
-                        sw.WriteLine(pathInfo);
+                        sw.WriteLine(ReadSetting("pathInfo"));
                         sw.Close();
 
                         Console.WriteLine("ho creato il file");
