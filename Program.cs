@@ -336,16 +336,16 @@ namespace csharp_biblioteca
             }
             else
             {
-                Console.WriteLine("Conosci il percorso del file?");
-                Console.WriteLine("1 : Conosci il percorso ");
-                Console.WriteLine("2 : Non conosco il percorso ");
+                Console.WriteLine("Preferenze di stampa");
+                Console.WriteLine("1 : Vuoi salvare in un nuovo file ");
+                Console.WriteLine("2 : Usa il percorso standard ");
 
                 string option = Console.ReadLine();
 
 
                 if (option != null && option == "1")
                 {
-                    Console.WriteLine("scrivere il percorso completo del file con il nome del file");
+                    Console.WriteLine("scrivere il percorso completo del nome file : ");
                     pathSalva = Console.ReadLine();
 
                    
