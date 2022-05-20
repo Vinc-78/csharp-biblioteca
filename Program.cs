@@ -149,7 +149,13 @@ namespace csharp_biblioteca
                     // parte inserita per esercitazione ( aggiumta Lista Utenti )
                     // nella prima parte lavora con il dizionario
 
-                    MiaBib.RestoreUtenti();
+                    CreaFilediSalvataggio();  // metodo aggiunto nell'esercitazione del 20/05 di mattina
+                                              // per la configurazione di un file di salvataggio
+
+
+                    // MiaBib.RestoreUtenti();
+
+                     
 
                     Scaffale s1 = new Scaffale("S001");
                     Scaffale s2 = new Scaffale("S002");
@@ -197,11 +203,9 @@ namespace csharp_biblioteca
 
                     MiaBib.Utenti.Add(u1);  //aggiunge alla lista direttamente
 
-                    MiaBib.SaveUtenti();  // Salva gli utenti della lista
-
                     MiaBib.Utenti.Add(prova);  //aggiunge alla lista direttamente
 
-                    MiaBib.SaveUtenti();
+                    MiaBib.SaveUtenti();  // Salva gli utenti della lista
 
                     //Questa parte è per prendere anche gli utenti del dizionario
 
@@ -269,6 +273,105 @@ namespace csharp_biblioteca
 
 
             }
+        }
+
+        // metodo che verifica se esiste il percorso di salvataggio 
+
+        // C:\Users\Public\Biblioteca\bibliotecaSalva.txt 
+
+        // se non esiste legge il percoso di salvataggio da C:\Users\Public\Biblioteca\bibliotecaInfo.txt 
+        
+        static void CreaFilediSalvataggio() 
+        {
+            string variabileAmbiente = Environment.GetEnvironmentVariable("PUBLIC");
+
+            if (variabileAmbiente != null) { Console.WriteLine(variabileAmbiente); }
+
+            //if(Directory.Exists("@"+ variabileAmbiente + "\\Biblioteca"))
+
+            string variabileAmbienteCompleta = variabileAmbiente + "\\Biblioteca";
+
+            string pathInfo = variabileAmbienteCompleta + "\\bibliotecaInfo.txt";
+
+            string pathSalva;
+
+            if (Directory.Exists(variabileAmbienteCompleta))
+            { Console.WriteLine("la directory esiste"); }
+            else
+            {
+                Directory.CreateDirectory(variabileAmbienteCompleta);
+                Console.WriteLine("la directory non esisteva l'ho creata");
+            }
+
+            if (File.Exists(pathInfo))
+            { 
+                Console.WriteLine("Il file esiste vado a leggere il percorso");
+                
+
+                string linea = "";
+                try
+                {
+                    Console.WriteLine("sto leggendo {0}", pathInfo );
+                    StreamReader leggi = new StreamReader(pathInfo);
+
+                    while ((linea = leggi.ReadLine()) != null)
+                    //legge il contenuto di Info
+                    {
+
+                        pathSalva=linea;
+
+                        leggi.Close();     //Importante
+
+                    }
+
+                    
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Exception: " + e.Message);
+                    
+                }
+
+
+            }
+            else
+            {
+                Console.WriteLine("Conosci il percorso del file?");
+                Console.WriteLine("1 : Conosci il percorso ");
+                Console.WriteLine("2 : Non conosco il percorso ");
+
+                string option = Console.ReadLine();
+
+
+                if (option != null && option == "1")
+                {
+                    Console.WriteLine("scrivere il percorso completo del file con il nome del file");
+                    pathSalva = Console.ReadLine();
+
+                   
+
+                }
+                else if (option != null && option == "2")
+                {
+                    try
+                    {
+                        StreamWriter sw = new StreamWriter(pathInfo);
+
+                        sw.WriteLine("C:\\Users\\Public\\Biblioteca\\bibliotecaSalva.txt");
+                        sw.Close();
+
+                        Console.WriteLine("ho creato il file");
+                    }
+                    catch (Exception ex) { Console.WriteLine(ex.Message); }
+                }
+
+                else
+                {
+                    Console.WriteLine("Scelta non consentita");
+                    Environment.Exit(0);
+                }
+            }
+
         }
 
     }

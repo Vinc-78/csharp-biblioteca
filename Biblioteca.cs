@@ -15,7 +15,9 @@ namespace csharp_biblioteca
         public List<Utente> Utenti { get; set; }
         public ListaUtenti MiaListaUtenti { get; set; }
 
+        
        
+
         public Biblioteca(string Nome)
         {
             this.Nome = Nome;
@@ -25,12 +27,29 @@ namespace csharp_biblioteca
             this.Utenti = new List<Utente>();
 
         }
+        static string variabileAmbiente = Environment.GetEnvironmentVariable("PUBLIC");
 
-        public bool SaveUtenti(string filename ="log.txt")
+        static string pathSalva = variabileAmbiente + "\\Biblioteca" + "\\bibliotecaSalva.txt";
+
+        public bool SaveUtenti()
         {
+            
             try
             {
-                StreamWriter sw = new StreamWriter(filename);
+                string variabileAmbiente = Environment.GetEnvironmentVariable("PUBLIC");
+
+                string path = variabileAmbiente + "\\Biblioteca" +"\\bibliotecaSalva.txt";
+
+                // salva in C:\Users\Public\Biblioteca\biblioteca.txt  
+                //creato dal metodo CreaFilediSalvataggio() in program
+
+                Console.WriteLine("percorso di salvataggio è {0}", pathSalva);
+                //StreamWriter sw = new StreamWriter(@"C: \Users\Public\Biblioteca\biblioteca.txt");
+
+                StreamWriter sw = new StreamWriter(pathSalva);
+
+                //sw.WriteLine("ListaUtenti");
+
                 foreach (Utente utente in Utenti)
                 {
                     sw.WriteLine(utente.Nome + ":" + utente.Cognome + ":" + utente.Telefono + ":" + utente.Email + ":" + utente.Password);
@@ -47,12 +66,12 @@ namespace csharp_biblioteca
 
         }
 
-        public bool RestoreUtenti(string filename = "log.txt")
+        public bool RestoreUtenti()
         {
             string linea = "";
             try
             {
-                StreamReader leggi = new StreamReader(filename);
+                StreamReader leggi = new StreamReader(pathSalva);
             
                 while ((linea = leggi.ReadLine()) != null)
                 {
