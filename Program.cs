@@ -228,6 +228,13 @@ namespace csharp_biblioteca
                     Prestito p1 = new Prestito("P00001", new DateTime(2019, 1, 20), new DateTime(2019, 2, 20), u1, l1);
                     Prestito p2 = new Prestito("P00002", new DateTime(2019, 3, 20), new DateTime(2019, 4, 20), u1, l2);
 
+                    //prove sul DataTime
+                    var tempoAl = p1.Al;
+
+                    DateTime ora = DateTime.Now;
+
+                    Console.WriteLine("tempo del prestito {0}, ad oggi è {1}", p1.Numero , ora - tempoAl);  //1185.17:11:03.8324402
+
 
 
                     Prestito p3 = new Prestito("P00002", new DateTime(2019, 3, 20), new DateTime(2019, 4, 20), u2, l2);
