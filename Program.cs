@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 
 namespace csharp_biblioteca
 {
     internal class Program
     {
-        
+
         static void Main(string[] args)  //entry point
         {
-            
+
             /*
              Si vuole progettare un sistema per la gestione di una biblioteca.
 
@@ -44,9 +45,11 @@ namespace csharp_biblioteca
             Prestito p1 = new Prestito("A01", new DateTime(2019, 1, 20), new DateTime(2019, 2, 20), u1, d1);
             */
 
+           
+
             Biblioteca MiaBib = new Biblioteca("Universitaria");
 
-           
+
             Console.WriteLine("1 : registra utente");
             Console.WriteLine("2 : stampa la parte del main discussa in esercitazione");
 
@@ -56,16 +59,18 @@ namespace csharp_biblioteca
             Console.WriteLine("Cosa vuoi fare ? ");
 
             string sOperazione = Console.ReadLine();
-            
 
-            while (sOperazione != "") {
+
+            while (sOperazione != "")
+            {
 
                 if (sOperazione == "1")
                 {
                     Console.WriteLine("Nome Utente: ");
 
                     string nome = Console.ReadLine();
-                    if (nome == "") { 
+                    if (nome == "")
+                    {
                         Console.WriteLine("Devi scvrivere qualcosa ");
                         Console.WriteLine("Premi invio e Ricomincia");
                         Console.ReadLine();
@@ -74,7 +79,7 @@ namespace csharp_biblioteca
 
                     Console.WriteLine("Cognome Utente: ");
                     string cognome = Console.ReadLine();
-                        if (cognome == "")
+                    if (cognome == "")
                     {
                         Console.WriteLine("Devi scvrivere qualcosa ");
                         Console.WriteLine("Premi invio e Ricomincia");
@@ -84,7 +89,7 @@ namespace csharp_biblioteca
 
                     Console.WriteLine("Telefono Utente: ");
                     string telefono = Console.ReadLine();
-                        if (telefono == "")
+                    if (telefono == "")
                     {
                         Console.WriteLine("Devi scvrivere qualcosa ");
                         Console.WriteLine("Premi invio e Ricomincia");
@@ -94,8 +99,8 @@ namespace csharp_biblioteca
 
 
                     Console.WriteLine("Email Utente: ");
-                        string email = Console.ReadLine();
-                        if (email == "")
+                    string email = Console.ReadLine();
+                    if (email == "")
                     {
                         Console.WriteLine("Devi scvrivere qualcosa ");
                         Console.WriteLine("Premi invio e Ricomincia");
@@ -136,8 +141,8 @@ namespace csharp_biblioteca
 
                     Console.WriteLine("Cosa Vuoi fare ora: ");
                     sOperazione = Console.ReadLine();
-                   
-                   
+
+
 
 
                 }
@@ -153,9 +158,9 @@ namespace csharp_biblioteca
                                               // per la configurazione di un file di salvataggio
 
 
-                   // MiaBib.RestoreUtenti(); 
+                    // MiaBib.RestoreUtenti(); 
 
-                     
+
 
                     Scaffale s1 = new Scaffale("S001");
                     Scaffale s2 = new Scaffale("S002");
@@ -184,16 +189,16 @@ namespace csharp_biblioteca
 
                     l2.Scaffale = s2;
                     MiaBib.Documenti.Add(l2);
-                    
 
-                    
+
+
                     Dvd dvd1 = new Dvd("Codice1", "Titolo 3", 2019, "Storia", 130);
 
                     dvd1.Autori.Add(a3);
 
                     dvd1.Scaffale = s3;
                     MiaBib.Documenti.Add(dvd1);
-                    
+
 
                     Utente u1 = new Utente("Nome 1", "Cognome 1", "Telefono 1", "Email 1", "Password 1");
 
@@ -223,7 +228,7 @@ namespace csharp_biblioteca
                     Prestito p1 = new Prestito("P00001", new DateTime(2019, 1, 20), new DateTime(2019, 2, 20), u1, l1);
                     Prestito p2 = new Prestito("P00002", new DateTime(2019, 3, 20), new DateTime(2019, 4, 20), u1, l2);
 
-                   
+
 
                     Prestito p3 = new Prestito("P00002", new DateTime(2019, 3, 20), new DateTime(2019, 4, 20), u2, l2);
 
@@ -231,7 +236,7 @@ namespace csharp_biblioteca
                     MiaBib.Prestiti.Add(p2);
 
                     // Devo modificare L'inserimento in Add e la ricerca in prestiti per gli elementi passati da stringa
-                                     
+
 
                     Console.WriteLine("\n\nSearchByCodice: ISBN1\n\n");
 
@@ -280,8 +285,8 @@ namespace csharp_biblioteca
         // C:\Users\Public\Biblioteca\bibliotecaSalva.txt 
 
         // se non esiste legge il percoso di salvataggio da C:\Users\Public\Biblioteca\bibliotecaInfo.txt 
-        
-        static void CreaFilediSalvataggio() 
+
+        static void CreaFilediSalvataggio()
         {
             string variabileAmbiente = Environment.GetEnvironmentVariable("PUBLIC");
 
@@ -295,6 +300,13 @@ namespace csharp_biblioteca
 
             string pathSalva;
 
+            //il prossimo rigo inserisce la chiave, la commento avendo già inserita la chiave
+            // AddUpdateAppSettings("pathInfo", pathInfo);
+
+            //per usarla come stringa  ReadSetting(pathInfo)
+
+            Console.WriteLine("la chiave inserita nel file di configurazione {0}", ReadSetting("pathInfo"));
+
             if (Directory.Exists(variabileAmbienteCompleta))
             { Console.WriteLine("la directory esiste"); }
             else
@@ -304,15 +316,15 @@ namespace csharp_biblioteca
             }
 
             if (File.Exists(pathInfo))
-            { 
+            {
                 Console.WriteLine("Il file esiste vado a leggere il percorso");
-                
+
 
                 string linea = "";
                 Console.WriteLine("sto leggendo {0}", pathInfo);
-                using (StreamReader leggi = new StreamReader(pathInfo)) 
+                using (StreamReader leggi = new StreamReader(pathInfo))
 
-                
+
                 {
 
                     while ((linea = leggi.ReadLine()) != null)
@@ -325,7 +337,7 @@ namespace csharp_biblioteca
                     }
 
                 }
-               
+
             }
             else
             {
@@ -341,7 +353,7 @@ namespace csharp_biblioteca
                     Console.WriteLine("scrivere il percorso completo del nome file : ");
                     pathSalva = Console.ReadLine();
 
-                   
+
 
                 }
                 else if (option != null && option == "2")
@@ -367,9 +379,75 @@ namespace csharp_biblioteca
 
         }
 
+        
+        static void ReadAllSettings()
+        {
+            try
+            {
+                var appSettings = ConfigurationManager.AppSettings;
+                if (appSettings.Count == 0)
+                {
+                    Console.WriteLine("AppSettings is empty.");
+                }
+                else
+                {
+                    foreach (var key in appSettings.AllKeys)
+                    {
+                        Console.WriteLine("Key: {0} Value: {1}", key, appSettings[key]);
+                    }
+                }
+            }
+            catch (ConfigurationErrorsException)
+            {
+                Console.WriteLine("Error reading app settings");
+            }
+        }
+
+        static string ReadSetting(string key)
+        {
+            try
+            {
+                var appSettings = ConfigurationManager.AppSettings;
+                string result = appSettings[key] ?? "Not Found";
+                return result;
+            }
+            catch (ConfigurationErrorsException)
+            {
+                Console.WriteLine("Error reading app settings");
+                return "";
+            }
+        }
+
+        static void AddUpdateAppSettings(string key, string value)
+        {
+            try
+            {
+                var configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                var settings = configFile.AppSettings.Settings;
+                if (settings[key] == null)
+                {
+                    settings.Add(key, value);
+                }
+                else
+                {
+                    settings[key].Value = value;
+                }
+                configFile.Save(ConfigurationSaveMode.Modified);
+                ConfigurationManager.RefreshSection(configFile.AppSettings.SectionInformation.Name);
+            }
+            catch (ConfigurationErrorsException)
+            {
+                Console.WriteLine("Error writing app settings");
+            }
+        }
+
+
+
+        
+
     }
 
 }
 
 
-    
+

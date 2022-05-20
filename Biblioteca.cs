@@ -32,19 +32,15 @@ namespace csharp_biblioteca
 
         static string pathSalva = variabileAmbiente + "\\Biblioteca" + "\\bibliotecaSalva.txt";
 
-        
+        // salva in C:\Users\Public\Biblioteca\biblioteca.txt  
+        //creato dal metodo CreaFilediSalvataggio() in program
 
         public bool SaveUtenti()
         {
             
             try
             {
-                string variabileAmbiente = Environment.GetEnvironmentVariable("PUBLIC");
-
-                string path = variabileAmbiente + "\\Biblioteca" +"\\bibliotecaSalva.txt";
-
-                // salva in C:\Users\Public\Biblioteca\biblioteca.txt  
-                //creato dal metodo CreaFilediSalvataggio() in program
+                            
 
                 Console.WriteLine("percorso di salvataggio è {0}", pathSalva);
                 //StreamWriter sw = new StreamWriter(@"C: \Users\Public\Biblioteca\biblioteca.txt");
