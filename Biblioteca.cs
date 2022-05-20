@@ -15,8 +15,8 @@ namespace csharp_biblioteca
         public List<Utente> Utenti { get; set; }
         public ListaUtenti MiaListaUtenti { get; set; }
 
-        
        
+
 
         public Biblioteca(string Nome)
         {
@@ -25,11 +25,14 @@ namespace csharp_biblioteca
             this.Prestiti = new List<Prestito>();
             this.MiaListaUtenti = new ListaUtenti();
             this.Utenti = new List<Utente>();
+            
 
         }
         static string variabileAmbiente = Environment.GetEnvironmentVariable("PUBLIC");
 
         static string pathSalva = variabileAmbiente + "\\Biblioteca" + "\\bibliotecaSalva.txt";
+
+        
 
         public bool SaveUtenti()
         {
@@ -69,32 +72,34 @@ namespace csharp_biblioteca
         public bool RestoreUtenti()
         {
             string linea = "";
+            StreamReader leggi = new StreamReader(pathSalva);
             try
             {
-                StreamReader leggi = new StreamReader(pathSalva);
-            
+                
                 while ((linea = leggi.ReadLine()) != null)
                 {
-                    
+
                     char separatore = ':';
 
                     string[] vetStringhe = linea.Split(separatore);
 
                     Utente nuovoUtente = new Utente(vetStringhe[0], vetStringhe[1], vetStringhe[2], vetStringhe[3], vetStringhe[4]);
-                    
+
                     Utenti.Add(nuovoUtente);
-                    
-                    leggi.Close();
+
 
                 }
-                
+
                 return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine("Exception: " + e.Message);
-                return false; 
+                
+                return false;
             }
+
+            finally { leggi.Close(); }
 
         }
 

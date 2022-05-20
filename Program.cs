@@ -5,9 +5,10 @@ namespace csharp_biblioteca
 {
     internal class Program
     {
+        
         static void Main(string[] args)  //entry point
         {
-
+            
             /*
              Si vuole progettare un sistema per la gestione di una biblioteca.
 
@@ -46,7 +47,6 @@ namespace csharp_biblioteca
             Biblioteca MiaBib = new Biblioteca("Universitaria");
 
            
-
             Console.WriteLine("1 : registra utente");
             Console.WriteLine("2 : stampa la parte del main discussa in esercitazione");
 
@@ -153,7 +153,7 @@ namespace csharp_biblioteca
                                               // per la configurazione di un file di salvataggio
 
 
-                    // MiaBib.RestoreUtenti();
+                   // MiaBib.RestoreUtenti(); 
 
                      
 
@@ -199,7 +199,7 @@ namespace csharp_biblioteca
 
                     Utente prova = new Utente("Carlo", "Prova", "TelefonoP1", "EmailP1", "PasswordP1");
 
-                    // devo commentare i due Add per provare il metodo Restore riga 156
+                    //Importante!!! devo commentare i due Add per provare il metodo Restore riga 156
 
                     MiaBib.Utenti.Add(u1);  //aggiunge alla lista direttamente
 
@@ -350,7 +350,7 @@ namespace csharp_biblioteca
                     {
                         StreamWriter sw = new StreamWriter(pathInfo);
 
-                        sw.WriteLine("C:\\Users\\Public\\Biblioteca\\bibliotecaSalva.txt");
+                        sw.WriteLine(pathInfo);
                         sw.Close();
 
                         Console.WriteLine("ho creato il file");
